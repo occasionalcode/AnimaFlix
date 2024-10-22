@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
+import { Route as AnimeInfoAnimeIdIndexImport } from './routes/anime-Info/$animeId/index'
 
 // Create/Update Routes
 
@@ -23,6 +24,11 @@ const IndexRoute = IndexImport.update({
 
 const DashboardIndexRoute = DashboardIndexImport.update({
   path: '/dashboard/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AnimeInfoAnimeIdIndexRoute = AnimeInfoAnimeIdIndexImport.update({
+  path: '/anime-Info/$animeId/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -44,6 +50,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof rootRoute
     }
+    '/anime-Info/$animeId/': {
+      id: '/anime-Info/$animeId/'
+      path: '/anime-Info/$animeId'
+      fullPath: '/anime-Info/$animeId'
+      preLoaderRoute: typeof AnimeInfoAnimeIdIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -52,36 +65,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/anime-Info/$animeId': typeof AnimeInfoAnimeIdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/anime-Info/$animeId': typeof AnimeInfoAnimeIdIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/anime-Info/$animeId/': typeof AnimeInfoAnimeIdIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard'
+  fullPaths: '/' | '/dashboard' | '/anime-Info/$animeId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard'
-  id: '__root__' | '/' | '/dashboard/'
+  to: '/' | '/dashboard' | '/anime-Info/$animeId'
+  id: '__root__' | '/' | '/dashboard/' | '/anime-Info/$animeId/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
+  AnimeInfoAnimeIdIndexRoute: typeof AnimeInfoAnimeIdIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardIndexRoute: DashboardIndexRoute,
+  AnimeInfoAnimeIdIndexRoute: AnimeInfoAnimeIdIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +115,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/dashboard/"
+        "/dashboard/",
+        "/anime-Info/$animeId/"
       ]
     },
     "/": {
@@ -105,6 +124,9 @@ export const routeTree = rootRoute
     },
     "/dashboard/": {
       "filePath": "dashboard/index.tsx"
+    },
+    "/anime-Info/$animeId/": {
+      "filePath": "anime-Info/$animeId/index.tsx"
     }
   }
 }

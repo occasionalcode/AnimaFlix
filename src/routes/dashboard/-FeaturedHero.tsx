@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Angry, Calendar, Laugh, Meh, Smile, Wind } from "lucide-react";
 import { HtmlHTMLAttributes, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import AnimeRating from "../components/-AnimeRating";
 
 type FeaturedHeroProps = {
   anime: Anime;
@@ -121,7 +122,8 @@ export default function FeaturedHero({ anime, animelist }: FeaturedHeroProps) {
                 </div>
 
                 {/* Rating */}
-                <div className="flex text-xs gap-1 text-gray-400 font-semibold ">
+                <AnimeRating anime={anime.rating} />
+                {/* <div className="flex text-xs gap-1 text-gray-400 font-semibold ">
                   {anime.rating! >= 80 ? (
                     <Laugh size={15} className="" />
                   ) : anime.rating! >= 70 && anime.rating! < 80 ? (
@@ -134,7 +136,7 @@ export default function FeaturedHero({ anime, animelist }: FeaturedHeroProps) {
                     <Angry size={15} className="" />
                   )}
                   <p>{`${anime.rating}%`}</p>
-                </div>
+                </div> */}
               </div>
             </div>
 
